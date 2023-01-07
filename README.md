@@ -1,10 +1,8 @@
-# Spring Data JPA CRUD with Vaadin
+# Phone Book - Spring Data JPA CRUD with Vaadin
 
-A super simple single table CRUD example with [Spring Data JPA](http://projects.spring.io/spring-data-jpa/) and [Vaadin](https://vaadin.com). Uses [Spring Boot](http://projects.spring.io/spring-boot/) for easy project setup and development. Helps you to get started with basic JPA backed applications and [Vaadin Spring Boot](https://vaadin.com/addon/vaadin-spring-boot) integration library.
+A simple single table Phone Book with [Spring Data JPA](http://projects.spring.io/spring-data-jpa/) and [Vaadin](https://vaadin.com). Uses [Spring Boot](http://projects.spring.io/spring-boot/) for easy project setup and development. Helps you to get started with basic JPA backed applications and [Vaadin Spring Boot](https://vaadin.com/addon/vaadin-spring-boot) integration library.
 
-For larger applications, consider applying some commonly known design patterns for your UI code. Check e.g. [this MVP example](https://github.com/peholmst/vaadin4spring/tree/master/spring-vaadin-mvp).
-
-## How to play with this example
+## How to run this application
 
 ### Suggested method
 
@@ -30,17 +28,3 @@ cd spring-data-vaadin-phonebook
 mvn package
 java -jar target/spring-data-vaadin-phonebook-0.0.1-SNAPSHOT.jar
 ```
-
-### Just deploy it
-
-The built jar file is really simple to deploy in modern PaaS services. E.g. if you have existing cloud foundry account and are already logged in with your cf (CLI) tools just execute following:
-
-```
-git clone https://github.com/mstahv/spring-data-vaadin-phonebook.git
-cd spring-data-vaadin-phonebook
-mvn install
-cf push choose-namefor-your-server-here -p target/*.jar -b https://github.com/cloudfoundry/java-buildpack.git
-
-```
-
-Note, that you can also use the cf push without the java-buildpack, but then you need to downgrade the example to Java 7. Check out the custom "java7" branch for that.
