@@ -14,6 +14,7 @@ import org.vaadin.viritin.fields.MTextField;
 import org.vaadin.viritin.form.AbstractForm;
 import org.vaadin.viritin.layouts.MFormLayout;
 import org.vaadin.viritin.layouts.MVerticalLayout;
+import phonebook.vaadin.componet.UserGroupField;
 
 @UIScope
 @SpringComponent
@@ -29,6 +30,8 @@ public class PersonForm extends AbstractForm<PersonModel> {
     TextField phoneNumber = new MTextField("Phone");
     DateField birthDay = new DateField("Birthday");
     Switch colleague = new Switch("Colleague");
+    @lombok.Getter
+    UserGroupField category = new UserGroupField("Special Purpose");
 
     PersonForm(PersonRepository r, EventBus.UIEventBus b) {
         super(PersonModel.class);
@@ -37,6 +40,7 @@ public class PersonForm extends AbstractForm<PersonModel> {
 
         // On save & cancel, publish events that other parts of the UI can listen
         setSavedHandler(personModel -> {
+//            getBinder().forField(getCategory()).bind(PersonModel::getCategory, PersonModel::setCategory);
             // persist changes
             personRepository.save(personModel);
             // send the event for other parts of the application
@@ -66,7 +70,8 @@ public class PersonForm extends AbstractForm<PersonModel> {
                         email,
                         phoneNumber,
                         birthDay,
-                        colleague
+                        colleague,
+                        category
                 ).withWidth(""),
                 getToolbar()
         ).withWidth("");

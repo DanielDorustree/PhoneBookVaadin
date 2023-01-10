@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface PersonRepository extends JpaRepository<PersonModel, Long> {
     
-    /* A version to fetch List instead of Page to avoid extra count query. */
     List<PersonModel> findAllBy(Pageable pageable);
     
     List<PersonModel> findByNameLikeIgnoreCase(String nameFilter);

@@ -1,5 +1,7 @@
 package phonebook.spring;
 
+import phonebook.vaadin.componet.GroupType;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -12,7 +14,7 @@ import java.util.Date;
 public class PersonModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // IDENTITY as the example has flyway in it and fixed schema in src/main/resources/db/migration
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -29,7 +31,17 @@ public class PersonModel implements Serializable {
     @NotNull(message = "Email is required")
     @Pattern(regexp = ".+@.+\\.[a-z]+", message = "Must be valid email")
     private String email;
-    
+
+    private GroupType category;
+
+    public GroupType getCategory() {
+        return category;
+    }
+
+    public void setCategory(GroupType category) {
+        this.category = category;
+    }
+
     public PersonModel() {
     }
 

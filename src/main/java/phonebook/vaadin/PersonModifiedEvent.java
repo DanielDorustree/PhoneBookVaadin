@@ -11,8 +11,4 @@ public class PersonModifiedEvent implements Serializable {
         this.personModel = p;
     }
 
-//    public PersonModel getPerson() {
-//        return personModel;
-//    }
-    
 }
