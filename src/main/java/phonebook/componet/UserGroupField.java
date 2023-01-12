@@ -2,18 +2,18 @@
  * Copyright (c) 2019 MedWorxs Inc. All rights reserved.
  */
 
-package phonebook.vaadin.componet;
+package phonebook.componet;
 
 import com.vaadin.ui.ComboBox;
 
 /**
  * <h1>User Group Field</h1>
  *
- * <p>Combo box for selecting a {@link GroupType}.</p>
+ * <p>Combo box for selecting a {@link UserGroupType}.</p>
  *
  */
 public class UserGroupField
-    extends ComboBox<GroupType>
+    extends ComboBox<UserGroupType>
 {
     //
     // static
@@ -33,7 +33,7 @@ public class UserGroupField
     )
     {
         super( _label );
-        setItems( GroupType.values() );
+        setItems( UserGroupType.values() );
     }
 
     //

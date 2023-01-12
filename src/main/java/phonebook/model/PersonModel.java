@@ -1,6 +1,6 @@
-package phonebook.spring;
+package phonebook.model;
 
-import phonebook.vaadin.componet.GroupType;
+import phonebook.componet.UserGroupType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -32,7 +32,7 @@ public class PersonModel implements Serializable {
     @Pattern(regexp = ".+@.+\\.[a-z]+", message = "Must be valid email")
     private String email;
 
-    private GroupType category;
+    private UserGroupType category;
 
     public PersonModel() {
     }
@@ -85,11 +85,11 @@ public class PersonModel implements Serializable {
         this.colleague = colleague;
     }
 
-    public GroupType getCategory() {
+    public UserGroupType getCategory() {
         return category;
     }
 
-    public void setCategory(GroupType category) {
+    public void setCategory(UserGroupType category) {
         this.category = category;
     }
 }

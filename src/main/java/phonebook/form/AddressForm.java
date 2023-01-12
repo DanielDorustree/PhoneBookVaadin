@@ -1,4 +1,4 @@
-package phonebook.vaadin;
+package phonebook.form;
 
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
@@ -9,8 +9,9 @@ import org.vaadin.viritin.fields.MTextField;
 import org.vaadin.viritin.form.AbstractForm;
 import org.vaadin.viritin.layouts.MFormLayout;
 import org.vaadin.viritin.layouts.MVerticalLayout;
-import phonebook.spring.AddressModel;
-import phonebook.spring.AddressRepository;
+import phonebook.model.AddressModel;
+import phonebook.repository.AddressRepository;
+import phonebook.handler.ModifiedEvent;
 
 @UIScope
 @SpringComponent

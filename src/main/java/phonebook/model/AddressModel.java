@@ -1,4 +1,4 @@
-package phonebook.spring;
+package phonebook.model;
 
 import javax.persistence.*;
 

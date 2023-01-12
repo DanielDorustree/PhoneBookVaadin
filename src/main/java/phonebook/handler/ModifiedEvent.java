@@ -1,7 +1,7 @@
-package phonebook.vaadin;
+package phonebook.handler;
 
-import phonebook.spring.AddressModel;
-import phonebook.spring.PersonModel;
+import phonebook.model.AddressModel;
+import phonebook.model.PersonModel;
 import java.io.Serializable;
 
 public class ModifiedEvent implements Serializable {

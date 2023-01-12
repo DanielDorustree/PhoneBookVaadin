@@ -1,4 +1,4 @@
-package phonebook.vaadin;
+package phonebook.view;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
@@ -9,10 +9,10 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.UI;
 import org.vaadin.viritin.label.Header;
-import phonebook.spring.AddressModel;
-import phonebook.spring.AddressRepository;
-import phonebook.spring.PersonModel;
-import phonebook.spring.PersonRepository;
+import phonebook.model.AddressModel;
+import phonebook.repository.AddressRepository;
+import phonebook.model.PersonModel;
+import phonebook.repository.PersonRepository;
 import org.vaadin.spring.events.EventBus;
 import org.vaadin.spring.events.EventScope;
 import org.vaadin.spring.events.annotation.EventBusListenerMethod;
@@ -22,11 +22,14 @@ import org.vaadin.viritin.fields.MTextField;
 import org.vaadin.viritin.grid.MGrid;
 import org.vaadin.viritin.layouts.MHorizontalLayout;
 import org.vaadin.viritin.layouts.MVerticalLayout;
+import phonebook.form.AddressForm;
+import phonebook.handler.ModifiedEvent;
+import phonebook.form.PersonForm;
 
 @Title("Phone Book")
 @Theme("valo")
 @SpringUI
-public class MainUI extends UI {
+public class PhoneBookMainView extends UI {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,8 +52,8 @@ public class MainUI extends UI {
             "Are you sure you want to delete the entry?", this::remove);
     private final Button updateAddress = new MButton(VaadinIcons.LOCATION_ARROW, this::editAddress);
 
-    public MainUI(PersonRepository pr, PersonForm pf, AddressForm af, EventBus.UIEventBus b,
-                  AddressRepository ar) {
+    public PhoneBookMainView(PersonRepository pr, PersonForm pf, AddressForm af, EventBus.UIEventBus b,
+                             AddressRepository ar) {
         this.personRepository = pr;
         this.personForm = pf;
         this.addressForm = af;

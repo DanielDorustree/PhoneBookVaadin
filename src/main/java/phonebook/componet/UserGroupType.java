@@ -2,7 +2,7 @@
  * Copyright (c) 2019 MedWorxs Inc. All rights reserved.
  */
 
-package phonebook.vaadin.componet;
+package phonebook.componet;
 
 
 import org.hibernate.ObjectNotFoundException;
@@ -13,7 +13,7 @@ import org.hibernate.ObjectNotFoundException;
  * <p>Enumeration of transaction types.</p>
  *
  */
-public enum GroupType
+public enum UserGroupType
 {
 	//
 	// enum
@@ -44,12 +44,12 @@ public enum GroupType
 	// operations
 	//
 	/**
-	 * Default constructor for {@link GroupType}.
+	 * Default constructor for {@link UserGroupType}.
 	 *
 	 * @param _text
 	 *    {@link String} descriptive text
 	 */
-	GroupType(
+	UserGroupType(
 		final String _text
 	)
 	{
@@ -77,21 +77,21 @@ public enum GroupType
 //        return StringUtility.staticFinalToHumanFriendly( name() );
 //    }
 
-	public static GroupType valueByDisplay(
+	public static UserGroupType valueByDisplay(
 		final String _target
 	)
 		throws ObjectNotFoundException
 	{
-		for (GroupType groupType : GroupType.values())
+		for (UserGroupType userGroupType : UserGroupType.values())
 		{
-			if (groupType.getText().equals(_target))
+			if (userGroupType.getText().equals(_target))
 			{
-				return groupType;
+				return userGroupType;
 			}
 		}
 
 		throw new ObjectNotFoundException(
-			GroupType.class
+			UserGroupType.class
 			, _target
 		);
 	}

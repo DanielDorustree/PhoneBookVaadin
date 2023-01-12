@@ -42,7 +42,7 @@
         <!-- vaadin4spring https://github.com/peholmst/vaadin4spring
              contains lots of handy helpers for serious Spring + Vaadin 
              applications. This example uses event bus to decouple the editor 
-             form from the MainUI class.
+             form from the PhoneBookMainView class.
         -->
         <dependency>
             <groupId>org.vaadin.spring.extensions</groupId>

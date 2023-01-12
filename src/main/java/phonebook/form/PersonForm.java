@@ -1,4 +1,4 @@
-package phonebook.vaadin;
+package phonebook.form;
 
 import com.vaadin.data.converter.LocalDateToDateConverter;
 import com.vaadin.spring.annotation.SpringComponent;
@@ -6,15 +6,16 @@ import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.TextField;
-import phonebook.spring.PersonModel;
-import phonebook.spring.PersonRepository;
+import phonebook.model.PersonModel;
+import phonebook.repository.PersonRepository;
 import org.vaadin.spring.events.EventBus;
 import org.vaadin.teemu.switchui.Switch;
 import org.vaadin.viritin.fields.MTextField;
 import org.vaadin.viritin.form.AbstractForm;
 import org.vaadin.viritin.layouts.MFormLayout;
 import org.vaadin.viritin.layouts.MVerticalLayout;
-import phonebook.vaadin.componet.UserGroupField;
+import phonebook.handler.ModifiedEvent;
+import phonebook.componet.UserGroupField;
 
 @UIScope
 @SpringComponent
