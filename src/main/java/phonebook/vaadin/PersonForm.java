@@ -1,8 +1,8 @@
 package phonebook.vaadin;
 
 import com.vaadin.data.converter.LocalDateToDateConverter;
-import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.UIScope;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.TextField;
@@ -44,9 +44,9 @@ public class PersonForm extends AbstractForm<PersonModel> {
             // persist changes
             personRepository.save(personModel);
             // send the event for other parts of the application
-            eventBus.publish(this, new PersonModifiedEvent(personModel));
+            eventBus.publish(this, new ModifiedEvent(personModel));
         });
-        setResetHandler(p -> eventBus.publish(this, new PersonModifiedEvent(p)));
+        setResetHandler(p -> eventBus.publish(this, new ModifiedEvent(p)));
 
         setSizeUndefined();
     }

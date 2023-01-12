@@ -1,8 +1,8 @@
 package phonebook.spring;
 
+import jakarta.persistence.*;
 import phonebook.vaadin.componet.GroupType;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -33,14 +33,6 @@ public class PersonModel implements Serializable {
     private String email;
 
     private GroupType category;
-
-    public GroupType getCategory() {
-        return category;
-    }
-
-    public void setCategory(GroupType category) {
-        this.category = category;
-    }
 
     public PersonModel() {
     }
@@ -91,5 +83,13 @@ public class PersonModel implements Serializable {
 
     public void setColleague(Boolean colleague) {
         this.colleague = colleague;
+    }
+
+    public GroupType getCategory() {
+        return category;
+    }
+
+    public void setCategory(GroupType category) {
+        this.category = category;
     }
 }
