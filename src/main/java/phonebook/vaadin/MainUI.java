@@ -7,9 +7,10 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import org.vaadin.viritin.label.Header;
+import phonebook.spring.AddressModel;
+import phonebook.spring.AddressRepository;
 import phonebook.spring.PersonModel;
 import phonebook.spring.PersonRepository;
 import org.vaadin.spring.events.EventBus;
@@ -29,14 +30,15 @@ public class MainUI extends UI {
 
     private static final long serialVersionUID = 1L;
 
-    PersonRepository personRepository;
-    PersonForm personForm;
-    EventBus.UIEventBus eventBus;
-
+    private final PersonRepository personRepository;
+    private final AddressRepository addressRepository;
+    private final PersonForm personForm;
+    private final AddressForm addressForm;
+    private final EventBus.UIEventBus eventBus;
     private final Header header = new Header("Phone Book");
     private final MGrid<PersonModel> list = new MGrid<>(PersonModel.class)
-            .withProperties("id", "name", "email")
-            .withColumnHeaders("id", "Name", "Email")
+            .withProperties("name", "email","phoneNumber","birthDay")
+            .withColumnHeaders("Name", "Email","Phone Number","Birth Day")
             .withFullWidth();
 
     private final MTextField filterByName = new MTextField()
@@ -45,11 +47,15 @@ public class MainUI extends UI {
     private final Button edit = new MButton(VaadinIcons.PENCIL, this::edit);
     private final Button delete = new ConfirmButton(VaadinIcons.TRASH,
             "Are you sure you want to delete the entry?", this::remove);
+    private final Button updateAddress = new MButton(VaadinIcons.LOCATION_ARROW, this::editAddress);
 
-    public MainUI(PersonRepository r, PersonForm f, EventBus.UIEventBus b) {
-        this.personRepository = r;
-        this.personForm = f;
+    public MainUI(PersonRepository pr, PersonForm pf, AddressForm af, EventBus.UIEventBus b,
+                  AddressRepository ar) {
+        this.personRepository = pr;
+        this.personForm = pf;
+        this.addressForm = af;
         this.eventBus = b;
+        this.addressRepository = ar;
     }
 
     @Override
@@ -58,7 +64,7 @@ public class MainUI extends UI {
         setContent(
                 new MVerticalLayout(
                         header,
-                        new MHorizontalLayout(filterByName, addNew, edit, delete),
+                        new MHorizontalLayout(filterByName, addNew, edit, delete, updateAddress),
                         list
                 ).expand(list)
         );
@@ -77,6 +83,7 @@ public class MainUI extends UI {
         boolean hasSelection = !list.getSelectedItems().isEmpty();
         edit.setEnabled(hasSelection);
         delete.setEnabled(hasSelection);
+        updateAddress.setEnabled(hasSelection);
     }
 
     private void listEntities() {
@@ -114,10 +121,26 @@ public class MainUI extends UI {
         personForm.openInModalPopup();
     }
 
+    public void editAddress(ClickEvent e) {
+        editAddress(list.asSingleSelect().getValue());
+    }
+
+    protected void editAddress(final PersonModel phoneBookEntry) {
+        AddressModel addressModel = addressRepository
+            .findAll()
+            .stream()
+            .filter( address-> address.getPerson().getId() == phoneBookEntry.getId() )
+            .findFirst()
+            .orElse(new AddressModel());
+        addressForm.setEntity(addressModel);
+        addressForm.getEntity().setPerson(phoneBookEntry);
+        addressForm.openInModalPopup();
+    }
     @EventBusListenerMethod(scope = EventScope.UI)
-    public void onPersonModified(PersonModifiedEvent event) {
+    public void onPersonModified(ModifiedEvent event) {
         listEntities();
         personForm.closePopup();
+        addressForm.closePopup();
     }
 
 }
