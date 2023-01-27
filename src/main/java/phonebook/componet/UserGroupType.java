@@ -1,16 +1,13 @@
 /*
- * Copyright (c) 2019 MedWorxs Inc. All rights reserved.
+ * Copyright (c) 2023 Dorustree private limited. All rights reserved.
  */
 
 package phonebook.componet;
 
-
-import org.hibernate.ObjectNotFoundException;
-
 /**
- * <h1>Special Purpose Type</h1>
+ * <h1>User Group Type</h1>
  *
- * <p>Enumeration of transaction types.</p>
+ * <p>Enumeration of UserGroupField.</p>
  *
  */
 public enum UserGroupType
@@ -33,16 +30,9 @@ public enum UserGroupType
 	;
 
 	//
-	// static
-	//
-
-	//
 	// constructors
 	//
 
-	//
-	// operations
-	//
 	/**
 	 * Default constructor for {@link UserGroupType}.
 	 *
@@ -56,44 +46,19 @@ public enum UserGroupType
 		text = _text;
 	}
 
+    //
+    // operations
+    //
+
 	/**
-	 * {@inheritDoc }
-	 *
-	 * @see Enum#toString()
+	 * Setup toString() to return text
+	 * @return  text
+     *      {@link String}
 	 */
 	@Override
 	public String toString()
 	{
 		return text;
-	}
-
-	/**
-	 * Gets a version of the enum identifier in a human friendly format.
-	 *
-	 * @return {@code String} - a human friendly version of the identifier
-	 */
-//    public String getDisplayName()
-//    {
-//        return StringUtility.staticFinalToHumanFriendly( name() );
-//    }
-
-	public static UserGroupType valueByDisplay(
-		final String _target
-	)
-		throws ObjectNotFoundException
-	{
-		for (UserGroupType userGroupType : UserGroupType.values())
-		{
-			if (userGroupType.getText().equals(_target))
-			{
-				return userGroupType;
-			}
-		}
-
-		throw new ObjectNotFoundException(
-			UserGroupType.class
-			, _target
-		);
 	}
 
 	//

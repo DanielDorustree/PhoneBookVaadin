@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023 Dorustree private limited. All rights reserved.
+ */
+
 package phonebook.model;
 
 import javax.persistence.*;
@@ -6,9 +10,19 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
+/**
+ * <h1>Address Model</h1>
+ *
+ * <p>Model with handling address {@link AddressModel} details</p>
+ */
 @Entity
 @Table(name = "address")
-public class AddressModel implements Serializable {
+public class AddressModel implements Serializable
+{
+
+    //
+    // attributes
+    //
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +49,10 @@ public class AddressModel implements Serializable {
     @OneToOne
     @JoinColumn(name = "person_id")
     private PersonModel person;
+
+    //
+    // constructor
+    //
 
     public PersonModel getPerson() {
         return person;
@@ -91,5 +109,4 @@ public class AddressModel implements Serializable {
     public void setPinCode(String pinCode) {
         this.pinCode = pinCode;
     }
-
 }

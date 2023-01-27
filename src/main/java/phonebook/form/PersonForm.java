@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023 Dorustree private limited. All rights reserved.
+ */
+
 package phonebook.form;
 
 import com.vaadin.data.converter.LocalDateToDateConverter;
@@ -17,43 +21,74 @@ import org.vaadin.viritin.layouts.MVerticalLayout;
 import phonebook.handler.ModifiedEvent;
 import phonebook.componet.UserGroupField;
 
+/**
+ * <h1>Person Form</h1>
+ *
+ * <p>Form to handle new or update person {@link PersonModel}.</p>
+ *
+ */
 @UIScope
 @SpringComponent
-public class PersonForm extends AbstractForm<PersonModel> {
+public class PersonForm
+    extends AbstractForm<PersonModel>
+{
 
-    private static final long serialVersionUID = 1L;
+    //
+    // autowired
+    //
 
-    EventBus.UIEventBus eventBus;
-    PersonRepository personRepository;
+    private final EventBus.UIEventBus eventBus;
+    private final PersonRepository personRepository;
 
-    TextField name = new MTextField("Name");
-    TextField email = new MTextField("Email");
-    TextField phoneNumber = new MTextField("Phone");
-    DateField birthDay = new DateField("Birthday");
-    Switch colleague = new Switch("Colleague");
-    @lombok.Getter
-    UserGroupField category = new UserGroupField("Special Purpose");
+    //
+    // attributes
+    //
 
-    PersonForm(PersonRepository r, EventBus.UIEventBus b) {
-        super(PersonModel.class);
-        this.personRepository = r;
-        this.eventBus = b;
+    private final TextField name = new MTextField("Name");
+    private final TextField email = new MTextField("Email");
+    private final TextField phoneNumber = new MTextField("Phone");
+    private final DateField birthDay = new DateField("Birthday");
+    private final Switch colleague = new Switch("Colleague");
+    private final UserGroupField category = new UserGroupField("Special Purpose");
+
+    //
+    // constructor
+    //
+
+    PersonForm (
+        final PersonRepository personRepository
+        , final EventBus.UIEventBus eventBus
+    )
+    {
+        super( PersonModel.class );
+        this.personRepository = personRepository;
+        this.eventBus = eventBus;
 
         // On save & cancel, publish events that other parts of the UI can listen
         setSavedHandler(personModel -> {
-//            getBinder().forField(getCategory()).bind(PersonModel::getCategory, PersonModel::setCategory);
             // persist changes
             personRepository.save(personModel);
             // send the event for other parts of the application
-            eventBus.publish(this, new ModifiedEvent(personModel));
+            eventBus.publish( this, new ModifiedEvent(personModel) );
         });
-        setResetHandler(p -> eventBus.publish(this, new ModifiedEvent(p)));
+
+        setResetHandler(event ->
+            eventBus.publish( this, new ModifiedEvent(event) )
+        );
 
         setSizeUndefined();
     }
 
+    //
+    // operations
+    //
+
+    /**
+     * Bind vaadin local date to java date field
+     */
     @Override
-    protected void bind() {
+    protected void bind()
+    {
         // DateField in Vaadin 8 uses LocalDate by default, the backend
         // uses plain old java.util.Date, thus we need a converter, using
         // built in helper here
@@ -63,8 +98,15 @@ public class PersonForm extends AbstractForm<PersonModel> {
         super.bind();
     }
 
+    /**
+     * Create person form
+     *
+     * @return
+     *      {@link Component}
+     */
     @Override
-    protected Component createContent() {
+    protected Component createContent()
+    {
         return new MVerticalLayout(
                 new MFormLayout(
                         name,
@@ -77,5 +119,4 @@ public class PersonForm extends AbstractForm<PersonModel> {
                 getToolbar()
         ).withWidth("");
     }
-
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 MedWorxs Inc. All rights reserved.
+ * Copyright (c) 2023 Dorustree private limited. All rights reserved.
  */
 
 package phonebook.componet;
@@ -16,17 +16,14 @@ public class UserGroupField
     extends ComboBox<UserGroupType>
 {
     //
-    // static
-    //
-
-    //
     // constructors
     //
 
     /**
-     * Label constructor.
+     * Set up the label and items {@link UserGroupType} in combo box
      *
-     * @param _label    {@link String}
+     * @param _label
+     *      {@link String}
      */
     public UserGroupField(
         final String _label
@@ -35,13 +32,4 @@ public class UserGroupField
         super( _label );
         setItems( UserGroupType.values() );
     }
-
-    //
-    // operations
-    //
-
-    //
-    // attributes
-    //
-
 }

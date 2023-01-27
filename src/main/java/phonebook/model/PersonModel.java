@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023 Dorustree private limited. All rights reserved.
+ */
+
 package phonebook.model;
 
 import phonebook.componet.UserGroupType;
@@ -9,9 +13,19 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * <h1>Person Model</h1>
+ *
+ * <p>Model with handling person {@link PersonModel} details</p>
+ */
 @Entity
 @Table(name = "person")
-public class PersonModel implements Serializable {
+public class PersonModel implements Serializable
+{
+
+    //
+    // attributes
+    //
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +47,10 @@ public class PersonModel implements Serializable {
     private String email;
 
     private UserGroupType category;
+
+    //
+    // constructor
+    //
 
     public PersonModel() {
     }
